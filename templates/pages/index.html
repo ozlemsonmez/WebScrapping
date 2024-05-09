@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OzMel Akademik</title>
+  <style>
+    body {
+        background-color: whitesmoke; /* Sayfa arka plan rengi */
+      }
+
+    .container {
+      width: 100%;
+      max-width: 600px;
+      margin: 0 auto;
+      center: 0; /* Ortala */
+    }
+
+    .search-header {
+      margin-bottom: 20px; /* Metin ile arama kutusu arası boşluk */
+    }
+
+    .search-box {
+      margin-bottom: 30px; /* Arama kutusu ile barlar arası boşluk */
+    }
+
+    .search-text {
+      text-align: center; /* Metni ortala */
+      font-family: Comic Sans MS ; /* Yazı tipi */
+      font-size: 50px; /* Yazı boyutu */
+      color: firebrick; /* Yazı rengi */
+      margin-bottom: 10px; /* Metin ile arama kutusu arası boşluk */
+    }
+
+    .search-input {
+        width: 600%; /* Arama kutusu genişliği */
+        max-width: 1000px;
+        padding: 10px; /* Boşluklar */
+        border-radius: 5px; /* Köşeleri yuvarlatma */
+        border: 1px solid #ccc; /* Kenarlık */
+        box-sizing: border-box; /* Padding ve border'ı genişliğe dahil et */
+      }
+
+      #search-button {
+        flex: 1; /* Eşit genişlikte */
+        padding: 10px; /* Boşluklar */
+        border: none; /* Kenarlık yok */
+        border-radius: 5px; /* Köşeleri yuvarlatma */
+        background-color: firebrick; /* Arka plan rengi */
+        color: #fff; /* Yazı rengi */
+        cursor: pointer; /* İmleci işaretçiye dönüştür */
+        width: 9%; /* Genişlik */
+      }
+  
+      #search-button:hover {
+        background-color: darkred; /* Üzerine gelindiğinde arka plan rengini değiştir */
+      }
+
+    .bar {
+      background-color: white; /* Arka plan rengi */
+      color: darkslateblue; /* Yazı rengi */
+      font-family: Arial, sans-serif; /* Yazı tipi */
+      font-size: 20px; /* Yazı boyutu */
+      padding: 10px; /* Boşluklar */
+      margin-bottom: 10px; /* Barlar arası boşluk */
+      border-radius: 5px; /* Köşeleri yuvarlatma */
+      height: 100px; /* Yükseklik */
+      margin-top: 20px; /* İlk barın üstünden boşluk */
+      width: 120%; /* Genişlik */
+      center: 0; /* Ortala */
+      margin-left: -10%; /* Barları sola kaydır */
+    }
+
+    .sub-bar1 {
+        flex: 1; /* Eşit genişlikte */
+        background-color: white; /* İç bar arka plan rengi */
+        margin: 4px; /* İç barlar arası boşluk */
+        border-radius: 5px; /* İç barların köşeleri */
+        height: 32px; /* Yükseklik */
+        font-weight:bold; /* Kalın font */
+        text-decoration: none;
+      }
+
+      .sub-bar2 {
+        flex: 1; /* Eşit genişlikte */
+        background-color: white; /* İç bar arka plan rengi */
+        margin: 4px; /* İç barlar arası boşluk */
+        border-radius: 5px; /* İç barların köşeleri */
+        height: 29px; /* Yükseklik */
+        font-size: 16px; /* Yeni font boyutu */
+        font-style:italic;
+      }
+
+      .sub-bar3 {
+        flex: 1; /* Eşit genişlikte */
+        background-color: white; /* İç bar arka plan rengi */
+        margin: 4px; /* İç barlar arası boşluk */
+        border-radius: 5px; /* İç barların köşeleri */
+        height: 29px; /* Yükseklik */
+        font-size: 16px; /* Yeni font boyutu */
+      }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <form method="post" action="{% url 'search' %}">
+      {% csrf_token %}
+      <div class="search-header">
+        <div class="search-text"> OzMel Akademik  </div>
+        <div class="search-box">
+          <input type="text" class="search-input" name="search_input" style="width: 90%;" placeholder="Ara...">
+          <button type="submit" id="search-button">Ara</button>
+        </div>
+      </div>
+    </form>
+    {% for id, title, author, date, type, publisher, keyword, summary, pdf_url in zip_list %}
+      <div class="bar">
+        <a href="{% url 'detail' %}?title={{ title }}&amp;author={{ author }}&amp;date={{ date }}&amp;type={{ type }}&amp;publisher={{ publisher }}&amp;keyword={{ keyword }}&amp;summary={{ summary }}&amp;pdf_url={{ pdf_url }}" class="sub-bar1">{{ title }}</a>
+        <div class="sub-bar2">{{ type }}</div>
+        <div class="sub-bar3">{{ author }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</body>
+</html>

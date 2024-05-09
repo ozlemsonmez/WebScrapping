@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <!-- Font Awesome CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            padding-bottom: 60px; /* Footer yüksekliği kadar alt boşluk bırak */
+            overflow-x: hidden; /* Sağa sola kaydırmayı engelle */
+            position: relative; /* PDF butonunu mutlak konumlandırmak için */
+            background-color: whitesmoke;
+        }
+        header {
+            background-color: firebrick;
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+        nav ul li {
+            float: left;
+        }
+        nav ul li a {
+            display: block;
+            color: #333;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav ul li a:hover {
+            background-color: #ddd;
+        }
+        main {
+            padding: 20px;
+            position: relative; /* PDF butonunu mutlak konumlandırmak için */
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        footer {
+            background-color: firebrick;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            width: 100%;
+            position: fixed; /* Sabit footer için position: fixed */
+            bottom: 0;
+            left: 0;
+            z-index: 1000; /* Diğer içeriklerin üzerine çıkması için */
+        }
+        
+        .pdf-button {
+            position: absolute;
+            top: 0;
+            right: 20px;
+            background-color: brown;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .pdf-button:hover {
+            background-color: firebrick; /* Üzerine gelindiğinde arka plan rengini değiştir */
+          }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>{{ title }}</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#tür">TÜR</a></li>
+            <li><a href="#tarih">YAYIMLANMA TARİHİ</a></li>
+            <li><a href="#yayıncı">YAYINCI</a></li>
+            <li><a href="#yazar">YAZARLAR</a></li>
+            <li><a href="#anahtar">ANAHTAR KELİMELER</a></li>
+            <li><a href="#özet">ÖZET</a></li>
+        </ul>
+    </nav>
+    
+
+    <main>
+        <a class="pdf-button" href="{% url 'open_pdf' %}"><i class="fas fa-file-pdf"></i> PDF Aç</a>
+        <section id="tür">
+            <h2>Tür</h2>
+            <p>{{ type }}</p>
+        </section>
+        <section id="tarih">
+            <h2>Yayımlanma Tarihi</h2>
+            <p>{{ date }}</p>
+        </section>
+        <section id="yayıncı">
+            <h2>Yayıncı Adı</h2>
+            <p>{{ publisher }}</p>
+        </section>
+        <section id="yazar">
+            <h2>Yazarlar</h2>
+            <p>{{ author }}</p>
+        </section>
+        <section id="anahtar">
+            <h2>Anahtar Kelimeler</h2>
+            <p>{{ keyword }}</p>
+        </section>
+        <section id="özet">
+            <h2>Özet</h2>
+            <p>{{ summary }}</p>
+        </section>
+    </main>
+    <footer>
+        <p>OzMel Akademik &copy; 2024</p>
+    </footer>
+</body>
+</html>
